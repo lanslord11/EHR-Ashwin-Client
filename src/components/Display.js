@@ -7,13 +7,28 @@ function Display({contract,account}) {
     const [data,setData] = useState("");
     const getdata=async()=>{
         let dataArray;
+        // dataArray=await contract.display(account);
         const Otheraddress = document.querySelector(".address").value;
+        // console.log(Otheraddress);
         try {
             if(Otheraddress){
+                console.log("here");
                 dataArray=await contract.display(Otheraddress);
-                console.log(dataArray);
+                // console.log(dataArray);
+                // console.log("Otheraddress",Otheraddress );
             }else{
-                dataArray=await contract.display(account);
+                // console.log("account",account);
+                console.log("contract",contract);
+
+                try{
+                    console.log("address",account); 
+                    dataArray=await contract.display(account);
+                    console.log("dataArray",dataArray);
+                }catch(e){
+                    console.error("Error",e);
+                    // console.log(e);
+                }
+                // console.log(dataArray);
             }
             const isEmpty = Object.keys(dataArray).length===0;
             if(!isEmpty){
@@ -32,7 +47,8 @@ function Display({contract,account}) {
             setData(images);
         }
         } catch (error) {
-            alert("You don't have access");
+            console.log(error);
+            alert("You don't ");
         }
         
         
